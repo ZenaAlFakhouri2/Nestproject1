@@ -1,11 +1,11 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { HydratedDocument } from 'mongoose';
 
-export type ShipmentDocument = Shipment & Document;
+export type ShipmentDocument = HydratedDocument<Shipment>;
 
 @Schema()
 export class Shipment {
-  @Prop()
+  @Prop({required:true})
   number: number;   
 
   @Prop({ required: true })

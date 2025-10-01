@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { ShipmentsService } from './shipments.service';
 import { Shipment } from './schemas/shipment.schema';
+import { CreateShipmentDto } from './dtos/create-shipment.dto';
 
 @Controller('shipments')
 export class ShipmentsController {
@@ -8,8 +9,8 @@ export class ShipmentsController {
 
   // Add a shipment
   @Post()
-  async addShipment(@Body() shipmentInfo: Partial<Shipment>) {
-    return this.shipmentsService.create(shipmentInfo);
+  addShipment(@Body() body: CreateShipmentDto) {
+    return this.shipmentsService.create(body);
   }
 
   @Get()
@@ -18,7 +19,8 @@ export class ShipmentsController {
   }
 
   @Get(':number')
-  async getShipmentsByNumber(@Param('number') number: string) {
+  async getShipmentsByNumber(@Param('number') number: Number) {
     return this.shipmentsService.getShipmentByNumber(Number(number));
   }
+
 }
